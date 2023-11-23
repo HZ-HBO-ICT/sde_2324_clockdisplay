@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class ClockDisplay {
 
     private NumberDisplay hours;
@@ -12,14 +14,26 @@ public class ClockDisplay {
         this.seconds = new NumberDisplay(60, minutes);
     }
 
+    public String getTime() {
+
+        String time = this.seconds.getFullTime();
+
+        return time;
+    }
+
+    public void Display(String msg) {
+        
+        System.out.println(msg);
+    }
+
     public void start() {
 
         while(true) {
             try {
-                Thread.sleep(10);
+                Thread.sleep(100);
                 this.seconds.increment();
-                String time = this.seconds.getTime();
-                System.out.println(time);
+
+                this.Display(getTime());
 
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
