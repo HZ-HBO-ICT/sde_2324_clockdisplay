@@ -12,14 +12,23 @@ public class ClockDisplay {
         this.seconds = new NumberDisplay(60, minutes);
     }
 
+    private String getTime() {
+        String s = this.seconds.getTime();
+        String m = this.minutes.getTime();
+        String h = this.hours.getTime();
+
+        return String.format("%s:%s:%s",h, m, s);
+    }
+
     public void start() {
 
         while(true) {
             try {
                 Thread.sleep(10);
                 this.seconds.increment();
-                String time = this.seconds.getTime();
-                System.out.println(time);
+                String time = this.getTime();
+                Console.clearScreen();
+                Console.println(time);
 
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);

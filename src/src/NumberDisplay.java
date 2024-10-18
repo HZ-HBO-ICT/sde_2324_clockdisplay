@@ -4,7 +4,6 @@ public class NumberDisplay {
     private int current;
 
     private NumberDisplay next;
-    private boolean hasNext;
 
     public NumberDisplay(int max, NumberDisplay next) {
         this.max = max;
@@ -13,14 +12,13 @@ public class NumberDisplay {
 
     public NumberDisplay(int max) {
         this.max = max;
-        this.hasNext = true;
     }
 
     public String getTime() {
 
         String time = (this.current < 10)
-                ? ": 0" + this.current
-                : ": " + this.current;
+                ? "0" + this.current
+                : "" + this.current;
 
         return time;
     }
@@ -31,9 +29,13 @@ public class NumberDisplay {
         if (this.current == this.max) {
             this.current = 0;
 
-            if(this.hasNext) {
+            if(this.hasNextDisplay()) {
                 this.next.increment();
             }
         }
+    }
+
+    private boolean hasNextDisplay() {
+        return this.next != null;
     }
 }
